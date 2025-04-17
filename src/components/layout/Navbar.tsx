@@ -2,7 +2,16 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { currentUser } from "@/data/mockData";
+import { LogOut, Settings, User } from "lucide-react";
 
 export function Navbar() {
   return (
@@ -33,12 +42,39 @@ export function Navbar() {
             <Button variant="outline" className="mr-4">
               Tìm kiếm
             </Button>
-            <div className="flex items-center">
-              <Avatar>
-                <AvatarImage src="" alt={currentUser.full_name} />
-                <AvatarFallback>{currentUser.full_name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
-              </Avatar>
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar>
+                  <AvatarImage src="" alt={currentUser.full_name} />
+                  <AvatarFallback>{currentUser.full_name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel>Tài khoản của tôi</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/profile" className="flex items-center">
+                    <User className="mr-2 h-4 w-4" />
+                    Thông tin cá nhân
+                  </Link>
+                </DropdownMenuItem>
+                {currentUser.role === 'admin' && (
+                  <DropdownMenuItem asChild>
+                    <Link to="/admin" className="flex items-center">
+                      <Settings className="mr-2 h-4 w-4" />
+                      Quản trị hệ thống
+                    </Link>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/login" className="flex items-center text-red-600">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Đăng xuất
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>
