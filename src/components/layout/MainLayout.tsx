@@ -18,12 +18,12 @@ export function MainLayout({ children }: MainLayoutProps) {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <h3 className="text-xl font-bold text-blue-600">LessonLane</h3>
-              <p className="text-gray-600 text-sm">© 2023 LessonLane. All rights reserved.</p>
+              <p className="text-gray-600 text-sm">© 2023 LessonLane. Bản quyền đã được bảo hộ.</p>
             </div>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-600 hover:text-blue-600">Terms</a>
-              <a href="#" className="text-gray-600 hover:text-blue-600">Privacy</a>
-              <a href="#" className="text-gray-600 hover:text-blue-600">Help</a>
+              <a href="#" className="text-gray-600 hover:text-blue-600">Điều khoản</a>
+              <a href="#" className="text-gray-600 hover:text-blue-600">Quyền riêng tư</a>
+              <a href="#" className="text-gray-600 hover:text-blue-600">Trợ giúp</a>
             </div>
           </div>
         </div>

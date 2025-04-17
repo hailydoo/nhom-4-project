@@ -18,20 +18,20 @@ export function Navbar() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               <Link to="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md font-medium">
-                Home
+                Trang chủ
               </Link>
               <Link to="/courses" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md font-medium">
-                Courses
+                Khóa học
               </Link>
               <Link to="/my-learning" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md font-medium">
-                My Learning
+                Học tập của tôi
               </Link>
             </div>
           </div>
           
           <div className="flex items-center">
             <Button variant="outline" className="mr-4">
-              Search
+              Tìm kiếm
             </Button>
             <div className="flex items-center">
               <Avatar>

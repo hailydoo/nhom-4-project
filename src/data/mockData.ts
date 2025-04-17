@@ -1,18 +1,17 @@
-
 import { Course, Chapter, Lesson, Page, Enrollment, User } from '@/types';
 
 // Mock Users
 export const users: User[] = [
   {
     id: 1,
-    full_name: 'John Doe',
-    email: 'john@example.com',
+    full_name: 'Nguyễn Văn A',
+    email: 'nguyenvana@example.com',
     role: 'user',
     status: 'active'
   },
   {
     id: 2,
-    full_name: 'Admin User',
+    full_name: 'Quản Trị Viên',
     email: 'admin@example.com',
     role: 'admin',
     status: 'active'
@@ -23,8 +22,8 @@ export const users: User[] = [
 export const courses: Course[] = [
   {
     id: 1,
-    title: 'Introduction to Web Development',
-    description: 'Learn the fundamentals of HTML, CSS, and JavaScript to build modern web applications.',
+    title: 'Nhập môn Lập trình Web',
+    description: 'Học các kiến thức cơ bản về HTML, CSS và JavaScript để xây dựng ứng dụng web hiện đại.',
     thumbnail: 'https://images.unsplash.com/photo-1561883088-039e53143d73',
     status: 'active',
     created_at: '2023-01-01T00:00:00Z',
@@ -32,8 +31,8 @@ export const courses: Course[] = [
   },
   {
     id: 2,
-    title: 'Python Programming Advanced Concepts',
-    description: 'Master advanced Python programming with practical examples and real-world applications.',
+    title: 'Lập trình Python Nâng cao',
+    description: 'Làm chủ lập trình Python nâng cao với các ví dụ thực tế và ứng dụng trong thực tiễn.',
     thumbnail: 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935',
     status: 'active',
     created_at: '2023-01-02T00:00:00Z',
@@ -41,8 +40,8 @@ export const courses: Course[] = [
   },
   {
     id: 3,
-    title: 'Data Science Fundamentals',
-    description: 'Get started with data analysis, visualization, and machine learning concepts.',
+    title: 'Khoa học Dữ liệu Cơ bản',
+    description: 'Bắt đầu với phân tích dữ liệu, trực quan hóa và các khái niệm về máy học.',
     thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71',
     status: 'active',
     created_at: '2023-01-03T00:00:00Z',
@@ -50,8 +49,8 @@ export const courses: Course[] = [
   },
   {
     id: 4,
-    title: 'Mobile App Development with React Native',
-    description: 'Build cross-platform mobile applications using React Native framework.',
+    title: 'Phát triển Ứng dụng Di động với React Native',
+    description: 'Xây dựng ứng dụng di động đa nền tảng sử dụng React Native framework.',
     thumbnail: 'https://images.unsplash.com/photo-1551650975-87deedd944c3',
     status: 'active',
     created_at: '2023-01-04T00:00:00Z',
@@ -64,7 +63,7 @@ export const chapters: Chapter[] = [
   {
     id: 1,
     course_id: 1,
-    title: 'Getting Started with HTML',
+    title: 'Bắt đầu với HTML',
     chapter_order: 1,
     created_at: '2023-01-01T00:00:00Z',
     updated_at: '2023-01-01T00:00:00Z'
@@ -72,7 +71,7 @@ export const chapters: Chapter[] = [
   {
     id: 2,
     course_id: 1,
-    title: 'CSS Fundamentals',
+    title: 'CSS Cơ bản',
     chapter_order: 2,
     created_at: '2023-01-01T00:00:00Z',
     updated_at: '2023-01-01T00:00:00Z'
@@ -80,7 +79,7 @@ export const chapters: Chapter[] = [
   {
     id: 3,
     course_id: 1,
-    title: 'JavaScript Basics',
+    title: 'JavaScript Cơ bản',
     chapter_order: 3,
     created_at: '2023-01-01T00:00:00Z',
     updated_at: '2023-01-01T00:00:00Z'
@@ -88,7 +87,7 @@ export const chapters: Chapter[] = [
   {
     id: 4,
     course_id: 2,
-    title: 'Advanced Python Functions',
+    title: 'Hàm Nâng cao trong Python',
     chapter_order: 1,
     created_at: '2023-01-02T00:00:00Z',
     updated_at: '2023-01-02T00:00:00Z'
@@ -96,7 +95,7 @@ export const chapters: Chapter[] = [
   {
     id: 5,
     course_id: 2,
-    title: 'Object Oriented Programming in Python',
+    title: 'Lập trình Hướng Đối tượng trong Python',
     chapter_order: 2,
     created_at: '2023-01-02T00:00:00Z',
     updated_at: '2023-01-02T00:00:00Z'
@@ -109,7 +108,7 @@ export const lessons: Lesson[] = [
   {
     id: 1,
     chapter_id: 1,
-    title: 'HTML Document Structure',
+    title: 'Cấu trúc Tài liệu HTML',
     lesson_order: 1,
     created_at: '2023-01-01T00:00:00Z',
     updated_at: '2023-01-01T00:00:00Z'
@@ -117,7 +116,7 @@ export const lessons: Lesson[] = [
   {
     id: 2,
     chapter_id: 1,
-    title: 'HTML Tags and Elements',
+    title: 'Thẻ và Phần tử HTML',
     lesson_order: 2,
     created_at: '2023-01-01T00:00:00Z',
     updated_at: '2023-01-01T00:00:00Z'
@@ -126,7 +125,7 @@ export const lessons: Lesson[] = [
   {
     id: 3,
     chapter_id: 2,
-    title: 'CSS Selectors',
+    title: 'Bộ chọn CSS',
     lesson_order: 1,
     created_at: '2023-01-01T00:00:00Z',
     updated_at: '2023-01-01T00:00:00Z'
@@ -134,7 +133,7 @@ export const lessons: Lesson[] = [
   {
     id: 4,
     chapter_id: 2,
-    title: 'CSS Box Model',
+    title: 'Mô hình Hộp CSS',
     lesson_order: 2,
     created_at: '2023-01-01T00:00:00Z',
     updated_at: '2023-01-01T00:00:00Z'
@@ -184,26 +183,26 @@ export const pages: Page[] = [
     page_number: 1,
     page_type: 'text',
     content: `
-      <h1>HTML Document Structure</h1>
-      <p>Every HTML document has a basic structure that includes the following elements:</p>
+      <h1>Cấu trúc Tài liệu HTML</h1>
+      <p>Mỗi tài liệu HTML đều có cấu trúc cơ bản bao gồm các phần tử sau:</p>
       <ul>
-        <li><strong>DOCTYPE declaration</strong>: Specifies the HTML version being used</li>
-        <li><strong>html element</strong>: The root element of the HTML document</li>
-        <li><strong>head element</strong>: Contains meta-information about the document</li>
-        <li><strong>body element</strong>: Contains the visible content of the page</li>
+        <li><strong>Khai báo DOCTYPE</strong>: Xác định phiên bản HTML được sử dụng</li>
+        <li><strong>Phần tử html</strong>: Phần tử gốc của tài liệu HTML</li>
+        <li><strong>Phần tử head</strong>: Chứa thông tin meta về tài liệu</li>
+        <li><strong>Phần tử body</strong>: Chứa nội dung hiển thị của trang</li>
       </ul>
-      <p>Here's an example of a basic HTML document structure:</p>
+      <p>Dưới đây là ví dụ về cấu trúc tài liệu HTML cơ bản:</p>
       <pre>
       &lt;!DOCTYPE html&gt;
-      &lt;html lang="en"&gt;
+      &lt;html lang="vi"&gt;
       &lt;head&gt;
           &lt;meta charset="UTF-8"&gt;
           &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-          &lt;title&gt;Document Title&lt;/title&gt;
+          &lt;title&gt;Tiêu đề Tài liệu&lt;/title&gt;
       &lt;/head&gt;
       &lt;body&gt;
-          &lt;h1&gt;Hello, World!&lt;/h1&gt;
-          &lt;p&gt;This is a paragraph.&lt;/p&gt;
+          &lt;h1&gt;Xin chào, Thế giới!&lt;/h1&gt;
+          &lt;p&gt;Đây là một đoạn văn bản.&lt;/p&gt;
       &lt;/body&gt;
       &lt;/html&gt;
       </pre>
