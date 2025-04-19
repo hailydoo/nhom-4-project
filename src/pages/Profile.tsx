@@ -5,9 +5,21 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { User } from "lucide-react";
-import { currentUser } from "@/data/mockData";
+import { useAuth } from "@/lib/context/AuthContext";
 
 export default function Profile() {
+  const { user } = useAuth();
+
+  if (!user) {
+    return (
+      <MainLayout>
+        <div className="container mx-auto px-4 py-8 text-center">
+          <h2 className="text-xl font-semibold">Vui lòng đăng nhập để xem thông tin cá nhân</h2>
+        </div>
+      </MainLayout>
+    );
+  }
+
   return (
     <MainLayout>
       <div className="container mx-auto px-4 py-8">
@@ -22,17 +34,17 @@ export default function Profile() {
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="fullName">Họ và tên</Label>
-                <Input id="fullName" value={currentUser.full_name} readOnly />
+                <Input id="fullName" value={user.full_name} readOnly />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" value={currentUser.email} readOnly />
+                <Input id="email" value={user.email} readOnly />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="role">Vai trò</Label>
                 <Input 
                   id="role" 
-                  value={currentUser.role === 'admin' ? 'Quản trị viên' : 'Người dùng'} 
+                  value={user.role === 'admin' ? 'Quản trị viên' : 'Người dùng'} 
                   readOnly 
                 />
               </div>
@@ -40,7 +52,7 @@ export default function Profile() {
                 <Label htmlFor="status">Trạng thái</Label>
                 <Input 
                   id="status" 
-                  value={currentUser.status === 'active' ? 'Đang hoạt động' : 'Không hoạt động'} 
+                  value={'Đang hoạt động'} 
                   readOnly 
                 />
               </div>
