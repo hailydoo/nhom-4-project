@@ -1,4 +1,3 @@
-
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { getCourseById, getChaptersByCourseId, getLessonsByChapterId, enrollments, currentUser } from "@/data/mockData";
@@ -8,43 +7,38 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { CheckCircle2, Clock, BookOpen, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Chapter, Lesson } from "@/types";
+import { courseApi, Course } from '@/lib/api/courses';
+import { toast } from 'sonner';
 
 const CourseDetail = () => {
-  const { courseId } = useParams<{ courseId: string }>();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [course, setCourse] = useState(getCourseById(Number(courseId)));
+  const [course, setCourse] = useState<Course | null>(null);
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [allLessons, setAllLessons] = useState<Lesson[]>([]);
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrollmentProgress, setEnrollmentProgress] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!course) {
-      // Course not found, redirect to courses page
-      navigate("/courses");
-      return;
-    }
+    const fetchCourse = async () => {
+      try {
+        if (!id) return;
+        const data = await courseApi.getCourseById(parseInt(id));
+        setCourse(data);
+        setChapters(data.chapters || []);
+        setAllLessons(data.chapters?.map(chapter => chapter.lessons) || []);
+        setIsEnrolled(!!data.enrollment);
+        setEnrollmentProgress(data.enrollment?.progress_percent || 0);
+      } catch (error: any) {
+        toast.error(error.message || 'Không thể tải thông tin khóa học');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    // Get chapters for this course
-    const courseChapters = getChaptersByCourseId(course.id);
-    setChapters(courseChapters);
-
-    // Get all lessons for this course
-    const lessons: Lesson[] = [];
-    courseChapters.forEach(chapter => {
-      const chapterLessons = getLessonsByChapterId(chapter.id);
-      lessons.push(...chapterLessons);
-    });
-    setAllLessons(lessons);
-
-    // Check if user is enrolled
-    const enrollment = enrollments.find(
-      e => e.course_id === course.id && e.user_id === currentUser.id
-    );
-    
-    setIsEnrolled(!!enrollment);
-    setEnrollmentProgress(enrollment?.progress_percent || 0);
-  }, [course, navigate]);
+    fetchCourse();
+  }, [id]);
 
   const handleEnroll = () => {
     // In a real app, this would be an API call
@@ -54,11 +48,36 @@ const CourseDetail = () => {
 
   const handleStartLearning = () => {
     if (allLessons.length > 0) {
-      navigate(`/learning/${courseId}/lessons/${allLessons[0].id}`);
+      navigate(`/learning/${id}/lessons/${allLessons[0].id}`);
     }
   };
 
-  if (!course) return null;
+  if (loading) {
+    return (
+      <MainLayout>
+        <div className="container mx-auto px-4 py-8">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-1/2 mb-4" />
+            <div className="aspect-video bg-gray-200 rounded-lg mb-6" />
+            <div className="h-4 bg-gray-200 rounded mb-2" />
+            <div className="h-4 bg-gray-200 rounded w-2/3" />
+          </div>
+        </div>
+      </MainLayout>
+    );
+  }
+
+  if (!course) {
+    return (
+      <MainLayout>
+        <div className="container mx-auto px-4 py-8">
+          <div className="text-center text-gray-600">
+            Không tìm thấy khóa học
+          </div>
+        </div>
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout>
@@ -151,7 +170,7 @@ const CourseDetail = () => {
                                 <span>{lesson.title}</span>
                                 {isEnrolled ? (
                                   <Button variant="ghost" asChild size="sm">
-                                    <Link to={`/learning/${courseId}/lessons/${lesson.id}`}>
+                                    <Link to={`/learning/${id}/lessons/${lesson.id}`}>
                                       View
                                     </Link>
                                   </Button>

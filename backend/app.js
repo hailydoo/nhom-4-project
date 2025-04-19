@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/users');
 const authRoutes = require('./routes/authRoutes');
+const courseRoutes = require('./routes/courseRoutes');
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 // Mount các route
 app.use('/users', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/courses', courseRoutes);
 
 // 404 handler
 app.use((req, res) => {

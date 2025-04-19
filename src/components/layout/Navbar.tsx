@@ -31,7 +31,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <h1 className="text-2xl font-bold text-blue-600">NHÓM 4 ANH EM</h1>
+              <h1 className="text-2xl font-bold text-blue-600">NHÓM 5 ANH EM</h1>
             </Link>
           </div>
           
