@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
@@ -7,17 +6,36 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { UserPlus } from "lucide-react";
+import { authApi } from "@/lib/api/auth";
+import { useAuth } from "@/lib/context/AuthContext";
+import { toast } from "sonner";
 
 export default function Register() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement registration logic
-    navigate("/login");
+    setIsLoading(true);
+
+    try {
+      const response = await authApi.register({
+        full_name: fullName,
+        email,
+        password,
+      });
+      setAuth(response);
+      toast.success("Đăng ký thành công!");
+      navigate("/");
+    } catch (error: any) {
+      toast.error(error.message || "Đăng ký thất bại");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -39,6 +57,7 @@ export default function Register() {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required
+                  disabled={isLoading}
                 />
               </div>
               <div className="space-y-2">
@@ -50,6 +69,7 @@ export default function Register() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={isLoading}
                 />
               </div>
               <div className="space-y-2">
@@ -60,10 +80,12 @@ export default function Register() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  disabled={isLoading}
                 />
               </div>
-              <Button type="submit" className="w-full">
-                <UserPlus className="mr-2 h-4 w-4" /> Đăng ký
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                <UserPlus className="mr-2 h-4 w-4" />
+                {isLoading ? "Đang đăng ký..." : "Đăng ký"}
               </Button>
               <p className="text-center text-sm text-gray-600">
                 Đã có tài khoản?{" "}
